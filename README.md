@@ -35,6 +35,6 @@ supports Unix-Like OSes (MacOS and Linux) and Windows.
 *    https://docs.python.org/2/library/hashlib.html
 
 This is the work of Landon Powell, and is licensed under 
-Creative Commons Zero. A non-professional and not 
-applicable-in-a-court-of-law summary of the license is effectively:
-do whatever you want with this.
+Creative Commons Zero. A non-professional and 
+not-applicable-in-a-court-of-law summary of the license 
+is effectively: do whatever you want with this.
