@@ -9,7 +9,7 @@ supports Unix-Like OSes (MacOS and Linux) and Windows.
 
 ## A quick tutorial on the use of Orwell - 
 * Run `bigbro.py` on a server of your choice, and forward the port '1984'.
-* The `bigbro.py` file will ask for a password. Set remember a secure one.
+* The `bigbro.py` file will ask for a password. Set and remember a secure one.
 * Change the `bigBro` variable on line 9 of `prole.py` to `bigbro.py`'s IP.
 * Compile `prole.py` for the OSes you're targeting using the resources below.
 * Run your compiled prole executable on zombie systems. 
