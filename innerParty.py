@@ -22,8 +22,6 @@ while turnedOn:
     sendCommand = raw_input(recipient + "> ")
     clientSocket.send(recipient + " " + sendCommand)
 
-    message = clientSocket.recv(2048)
-
     if message == "kill": turnedOn = False
 
     message = message.split(" ", 1)

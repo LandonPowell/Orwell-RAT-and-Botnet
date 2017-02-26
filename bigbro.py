@@ -19,15 +19,18 @@ serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverSocket . bind(( hostName, portNumber )) # To-do: PORT CHANGE LATER
 serverSocket . listen(10)
 
-def clientHandler(connection):
+def broadcast(message):
+    for ip in proles:
+        proles[ip].sendall(message)
+
+def clientHandler(connection, ip):
+    proles[ip] = connection
     message = ""
     while message != "kill":
-        message = connection.recv(2048).split(" ", 2)
+        message = connection.recv(2048).split(" ", 1)
 
         if message[0] == "all":
-            serverSocket.sendall()
-
-        print(message)
+            broadcast(message[1])
 
     connection.close()
 
@@ -36,6 +39,6 @@ while turnedOn: # *Wink wink nudge nudge*
     (clientSocket, address) = serverSocket.accept()
     thread.start_new_thread( 
         clientHandler,
-        ( clientSocket ,)
+        ( clientSocket, address[0] ,)
     )
     print( address )
