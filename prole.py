@@ -13,8 +13,8 @@ class commands:
     def log( output ): # Outputs to console.
         print( output )
 
-    def shell(command):
-        os.system(command)
+    def shell( command ): # Runs a shell command.
+        os.system( command )
 
 turnedOn = True
 while turnedOn:
