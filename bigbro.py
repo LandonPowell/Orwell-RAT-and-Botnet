@@ -39,6 +39,6 @@ while turnedOn: # *Wink wink nudge nudge*
     (clientSocket, address) = serverSocket.accept()
     thread.start_new_thread( 
         clientHandler,
-        ( clientSocket, address[0] ,)
+        ( clientSocket, address[0] )
     )
     print( address )
