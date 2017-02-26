@@ -27,13 +27,8 @@ supports Unix-Like OSes (MacOS and Linux) and Windows.
 * `?`, `l`, or `listen` - Listen for emits for a given time, or even 'forever'.
 
 # TO COMPILE OR RUN, - 
-## You'll need this stuff - 
-*    https://pypi.python.org/pypi/socketIO-client
-*    https://pypi.python.org/pypi/python-socketio
-*    https://pypi.python.org/pypi/eventlet
-
-## And these are default, but you also need them - 
-*    https://docs.python.org/2/library/urllib2.html
+## You need these - 
+*    https://docs.python.org/2/library/socket.html
 *    https://docs.python.org/2/library/hashlib.html
 
 This is the work of Landon Powell, and is licensed under 

