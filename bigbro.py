@@ -9,8 +9,8 @@ def hash(string):
         string.encode('utf-8')
     ).digest()
 
-# password    = hash( raw_input("Password? > ") ) # To-do: Uncomment this.
-proles      = {} # An IP to SID dictionary.
+password    = hash( raw_input("Password? > ") )
+proles      = {} # An IP to Connection dictionary.
 innerParty  = [] # List of Authorized SIDs.
 
 hostName, portNumber = "127.0.0.1" or socket.gethostname(), 8080
@@ -29,8 +29,17 @@ def clientHandler(connection, ip):
     while message != "kill":
         message = connection.recv(2048).split(" ", 1)
 
-        if message[0] == "all":
-            broadcast(message[1])
+        if ip in innerParty:
+            if message[0] == "all":
+                broadcast(message[1])
+            else:
+                proles[message[0]].sendall(message[1])
+
+        elif message[0] == "authenticate":
+            if hash(message[1]) == password:
+                innerParty.append(ip)
+            else:
+                print( "Attempt from : " + ip + " with " + hash( message[1] ) + " vs " + password)
 
     connection.close()
 
