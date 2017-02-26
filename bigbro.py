@@ -39,7 +39,7 @@ def clientHandler(connection, ip):
             if hash(message[1]) == password:
                 innerParty.append(ip)
             else:
-                print( "Attempt from : " + ip + " with " + hash( message[1] ) + " vs " + password)
+                print( "Attempt from : " + ip )
 
     connection.close()
 
