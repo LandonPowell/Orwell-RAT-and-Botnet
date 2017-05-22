@@ -7,7 +7,7 @@ used to send commands to BB that are given to the proles;
 and prole.py, used as the zombie client. Prole.py currently
 supports Unix-Like OSes (MacOS and Linux) and Windows.
 
-### Donate Bitcoin - `1Bmo74LBR6PFBtdsMnFms1rLqYFVDXCyvG`
+### Donate Bitcoin - `125QsXyFV5mWTGaJHZBzE6TDr4iMi2jSTp`
 
 ## A quick tutorial on the use of Orwell - 
 * Run `bigbro.py` on a server of your choice, and forward the port '1984'.
